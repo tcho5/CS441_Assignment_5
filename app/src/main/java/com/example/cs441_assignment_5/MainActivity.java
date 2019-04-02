@@ -17,12 +17,13 @@ class ANT{
     public float yCord;
     public int health = 100;
     public int level = 1;
+
 }
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
-    RelativeLayout newLayout;
-    private int _xDelta;
-    private int _yDelta;
+    RelativeLayout newLayout; //layout
+    private int _xDelta; //x variable
+    private int _yDelta; //y variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //creates a new layout
         newLayout = new RelativeLayout(this);
-        //RelativeLayout.LayoutParams boop = new RelativeLayout.LayoutParams(
-        //        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
+        //sets background
         newLayout.setBackgroundResource(R.drawable.antmap);
+
         //creates new object
         ImageView tower1 = new ImageView(this);
         tower1.setImageResource(R.drawable.tower1);
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tower1.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        //allows listeoner
+        //allows listener
         tower1.setOnTouchListener(this);
 
         //adds item to view
