@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/antmap"
         android:layout_width="747dp"
-        android:layout_height="496dp"
+        android:layout_height="499dp"
         app:srcCompat="@drawable/antmap"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
@@ -20,15 +20,15 @@
         android:layout_height="57dp"
         android:text="Score: "
         android:textSize="30dp"
-        tools:layout_editor_absoluteX="574dp"
-        tools:layout_editor_absoluteY="49dp" />
+        tools:layout_editor_absoluteX="509dp"
+        tools:layout_editor_absoluteY="70dp" />
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ShopButton"
-        tools:layout_editor_absoluteX="574dp"
-        tools:layout_editor_absoluteY="339dp" />
+        android:layout_width="196dp"
+        android:layout_height="59dp"
+        app:srcCompat="@drawable/shopbutton"
+        tools:layout_editor_absoluteX="519dp"
+        tools:layout_editor_absoluteY="336dp" />
 
 </android.support.constraint.ConstraintLayout>
