@@ -8,27 +8,61 @@
 
     <ImageView
         android:id="@+id/antmap"
-        android:layout_width="747dp"
-        android:layout_height="499dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/antmap"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="41dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="188dp"
         android:layout_height="57dp"
-        android:text="Score: "
+        android:layout_marginStart="509dp"
+        android:layout_marginLeft="509dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="34dp"
+        android:layout_marginBottom="284dp"
+        android:text="Score: 12345"
+        android:textColor="#FFFFFF"
         android:textSize="30dp"
-        tools:layout_editor_absoluteX="509dp"
-        tools:layout_editor_absoluteY="70dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="196dp"
-        android:layout_height="59dp"
-        app:srcCompat="@drawable/shopbutton"
-        tools:layout_editor_absoluteX="519dp"
-        tools:layout_editor_absoluteY="336dp" />
+        android:id="@+id/shopButton"
+        android:layout_width="198dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="335dp"
+        android:layout_marginEnd="494dp"
+        android:layout_marginRight="494dp"
+        android:layout_marginBottom="38dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/shopbutton" />
+
+    <ImageView
+        android:id="@+id/tower1"
+        android:layout_width="61dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginLeft="83dp"
+        android:layout_marginTop="241dp"
+        android:layout_marginEnd="587dp"
+        android:layout_marginRight="587dp"
+        android:layout_marginBottom="113dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tower1" />
 
 </android.support.constraint.ConstraintLayout>
