@@ -25,7 +25,7 @@
         android:layout_marginEnd="34dp"
         android:layout_marginRight="34dp"
         android:layout_marginBottom="284dp"
-        android:text="Score: 12345"
+        android:text="Score: 6"
         android:textColor="#FFFFFF"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,15 +55,16 @@
         android:layout_height="57dp"
         android:layout_marginStart="83dp"
         android:layout_marginLeft="83dp"
-        android:layout_marginTop="241dp"
+        android:layout_marginTop="247dp"
         android:layout_marginEnd="587dp"
         android:layout_marginRight="587dp"
-        android:layout_marginBottom="113dp"
+        android:layout_marginBottom="107dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/tower1" />
+
 
     <ImageView
         android:id="@+id/ant"
