@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Gallery;
 import android.widget.ImageButton;
@@ -29,7 +30,7 @@ class Ant{
 
 }
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
     private float dX;
     private float dY;
     private int screen_width;
@@ -60,10 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //
         ImageButton shopButton = findViewById(R.id.shopButton);
-        shopButton.setOnTouchListener(this);
+        shopButton.setOnClickListener(this);
 
         ant = findViewById(R.id.ant);
 //      ant.setOnTouchListener(this);
+
+        
         ImageButton tower1 = new ImageButton(this);
         tower1.setImageResource(R.drawable.tower1);
         tower1.setX(220);
@@ -77,21 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tower1.setOnTouchListener(this);
         layout.addView(tower1);
 
-
-
-//
-//        ImageButton tower2 = new ImageButton(this);
-//        tower2.setImageResource(R.drawable.tower1);
-//        tower2.setX(600);
-//        tower2.setY(850);
-//        tower2.setMaxHeight(175);
-//        tower2.setMaxWidth(175);
-//        tower2.setAdjustViewBounds(true);
-//        tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT));
-//        tower2.setBackgroundColor(Color.TRANSPARENT);
-//        tower2.setOnTouchListener(this);
-//        layout.addView(tower2);
 
 
         //coordinates for the ants
@@ -161,19 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public boolean onTouch(View view, MotionEvent event) {
         switch (view.getId()){
             case R.id.shopButton:
-                    ImageButton tower2 = new ImageButton(this);
-                    tower2.setImageResource(R.drawable.tower1);
-                    tower2.setX(600);
-                    tower2.setY(850);
-                    tower2.setMaxHeight(175);
-                    tower2.setMaxWidth(175);
-                    tower2.setAdjustViewBounds(true);
-                    tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT));
-                    tower2.setBackgroundColor(Color.TRANSPARENT);
-                    tower2.setOnTouchListener(this);
-                    layout.addView(tower2);
-                    break;
+                break;
             default: //Then they clicked a tower
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -193,5 +169,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
         return false;
     }
+    @Override
+    public void onClick(View v) {
+        ImageButton tower2 = new ImageButton(this);
+        tower2.setImageResource(R.drawable.tower1);
+        tower2.setX(600);
+        tower2.setY(850);
+        tower2.setMaxHeight(175);
+        tower2.setMaxWidth(175);
+        tower2.setAdjustViewBounds(true);
+        tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        tower2.setBackgroundColor(Color.TRANSPARENT);
+        tower2.setOnTouchListener(this);
+        layout.addView(tower2);
+    }
+
 
 }
