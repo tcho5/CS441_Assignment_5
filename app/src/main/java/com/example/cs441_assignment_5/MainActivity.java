@@ -1,13 +1,16 @@
 package com.example.cs441_assignment_5;
 
 import android.app.ActionBar;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Gallery;
 import android.widget.ImageButton;
@@ -27,10 +30,7 @@ class Ant{
 
 }
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
-    RelativeLayout newLayout; //layout
-    private int _xDelta; //x variable
-    private int _yDelta; //y variable
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
     private float dX;
     private float dY;
     private int screen_width;
@@ -40,12 +40,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private float anty = 550; //temp x
     private Handler handler = new Handler();
     private Timer timer = new Timer();
+    private ConstraintLayout layout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        layout = findViewById(R.id.constraintLayout);
 
         //get screen size and set up to get the ants in the right part of the screen
         WindowManager wm = getWindowManager();
@@ -57,12 +60,27 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //Gets rid of status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+//
         ImageButton shopButton = findViewById(R.id.shopButton);
-        ImageView tower1 = findViewById(R.id.tower1);
-        tower1.setOnTouchListener(this);
+        shopButton.setOnClickListener(this);
+
         ant = findViewById(R.id.ant);
-//        ant.setOnTouchListener(this);
+//      ant.setOnTouchListener(this);
+
+        
+        ImageButton tower1 = new ImageButton(this);
+        tower1.setImageResource(R.drawable.tower1);
+        tower1.setX(220);
+        tower1.setY(625);
+        tower1.setMaxHeight(175);
+        tower1.setMaxWidth(175);
+        tower1.setAdjustViewBounds(true);
+        tower1.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        tower1.setBackgroundColor(Color.TRANSPARENT);
+        tower1.setOnTouchListener(this);
+        layout.addView(tower1);
+
 
 
         //coordinates for the ants
@@ -97,26 +115,32 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         if (ant.getX() > 240 && ant.getX() < 590) {
             antx-=10;
             anty-=10;
+            ant.setRotation(0);
         }
         if (ant.getY() < 230 && ant.getY() > 130) {
             anty+=10;
             antx+=10;
+            ant.setRotation(90);
         }
         if (ant.getX() > 590 && ant.getX() < 1050) {
             antx-=10;
             anty+=10;
+            ant.setRotation(180);
         }
         if (ant.getY() > 640) {
             anty-=10;
             antx+=10;
+            ant.setRotation(90);
         }
         if (ant.getX() > 1050) {
             antx-=10;
             anty-=10;
+            ant.setRotation(0);
         }
         if (ant.getY() < 450 && ant.getX() > 1000) {
             anty+=10;
             antx+=10;
+            ant.setRotation(90);
         }
         ant.setX(antx);
         ant.setY(anty);
@@ -124,24 +148,43 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                dX = view.getX() - event.getRawX();
-                dY = view.getY() - event.getRawY();
+        switch (view.getId()){
+            case R.id.shopButton:
                 break;
-
-            case MotionEvent.ACTION_MOVE:
-                view.animate()
-                        .x(event.getRawX() + dX)
-                        .y(event.getRawY() + dY)
-                        .setDuration(0)
-                        .start();
-                break;
-            default:
-                return false;
+            default: //Then they clicked a tower
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        dX = view.getX() - event.getRawX();
+                        dY = view.getY() - event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        view.animate()
+                                .x(event.getRawX() + dX)
+                                .y(event.getRawY() + dY)
+                                .setDuration(0)
+                                .start();
+                        break;
+                    default:
+                        return false;
+                }
         }
-        return true;
-
+        return false;
     }
+    @Override
+    public void onClick(View v) {
+        ImageButton tower2 = new ImageButton(this);
+        tower2.setImageResource(R.drawable.tower1);
+        tower2.setX(600);
+        tower2.setY(850);
+        tower2.setMaxHeight(175);
+        tower2.setMaxWidth(175);
+        tower2.setAdjustViewBounds(true);
+        tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        tower2.setBackgroundColor(Color.TRANSPARENT);
+        tower2.setOnTouchListener(this);
+        layout.addView(tower2);
+    }
+
 
 }

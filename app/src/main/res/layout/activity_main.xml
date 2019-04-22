@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/constraintLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,7 +13,7 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/antmap"
-        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
@@ -49,31 +50,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/shopbutton" />
 
-    <ImageView
-        android:id="@+id/tower1"
-        android:layout_width="61dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="83dp"
-        android:layout_marginLeft="83dp"
-        android:layout_marginTop="247dp"
-        android:layout_marginEnd="587dp"
-        android:layout_marginRight="587dp"
-        android:layout_marginBottom="107dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tower1" />
-
 
     <ImageView
         android:id="@+id/ant"
         android:layout_width="35dp"
         android:layout_height="30dp"
+        android:rotation="90"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ant1" />
+
 
 </android.support.constraint.ConstraintLayout>
