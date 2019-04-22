@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private Handler handler = new Handler();
     private Timer timer = new Timer();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
