@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ant = findViewById(R.id.ant);
 //      ant.setOnTouchListener(this);
 
-        
+        /*
         ImageButton tower1 = new ImageButton(this);
         tower1.setImageResource(R.drawable.tower1);
         tower1.setX(220);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tower1.setBackgroundColor(Color.TRANSPARENT);
         tower1.setOnTouchListener(this);
         layout.addView(tower1);
-
+        */
 
 
         //coordinates for the ants
