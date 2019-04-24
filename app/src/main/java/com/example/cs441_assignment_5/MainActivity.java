@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int screen_height;
     private ImageView ant;
     int scoreVal = 0;
+    int levelVal = 0;
     private TextView score;
+    private TextView level;
     private float antx; //temp x
     private float anty = 550; //temp x
     private Handler handler = new Handler();
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         ant = findViewById(R.id.ant);
         score = findViewById(R.id.ScoreText);
+        level = findViewById(R.id.LevelText);
 //      ant.setOnTouchListener(this);
 
         /* this is for an initial tower spawn
@@ -115,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         if (ant.getX() > screen_width) {
             antx = -100.0f;
             anty = 550;
+            //problem when we spawn multiple ants, level would not increment linearly
+            levelVal++;
+            level.setText("Level " + levelVal);
         }
         if (ant.getX() > 240 && ant.getX() < 590) {
             antx-=10;
