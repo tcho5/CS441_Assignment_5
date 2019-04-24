@@ -31,6 +31,10 @@ class Ant{
 
 }
 
+class Tower {
+    public float range;
+}
+
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
     private float dX;
     private float dY;
@@ -118,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         if (ant.getX() > screen_width) {
             antx = -100.0f;
             anty = 550;
-            //problem when we spawn multiple ants, level would not increment linearly
+            //problem when we spawn multiple ants, level would not increment linearly (put in timer)
             levelVal++;
             level.setText("Level " + levelVal);
         }
