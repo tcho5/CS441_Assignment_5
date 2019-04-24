@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int screen_width;
     private int screen_height;
     private ImageView ant;
+    int scoreVal = 0;
+    private TextView score;
     private float antx; //temp x
     private float anty = 550; //temp x
     private Handler handler = new Handler();
@@ -65,9 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         shopButton.setOnClickListener(this);
 
         ant = findViewById(R.id.ant);
+        score = findViewById(R.id.ScoreText);
 //      ant.setOnTouchListener(this);
 
-        /*
+        /* this is for an initial tower spawn
         ImageButton tower1 = new ImageButton(this);
         tower1.setImageResource(R.drawable.tower1);
         tower1.setX(220);
@@ -142,6 +146,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             antx+=10;
             ant.setRotation(90);
         }
+        //decrements score
+        if  (ant.getY() < 450 && ant.getX() > 1790) {
+            scoreVal--;
+            score.setText("Score " + scoreVal);
+        }
         ant.setX(antx);
         ant.setY(anty);
     }
@@ -151,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         switch (view.getId()){
             case R.id.shopButton:
                 break;
-            default: //Then they clicked a tower
+            default: //When they clicked a tower
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         dX = view.getX() - event.getRawX();
