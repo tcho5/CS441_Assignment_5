@@ -41,10 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int screen_width;
     private int screen_height;
     private ImageView ant;
+    private ImageView bullet;
     int scoreVal = 0;
     int levelVal = 0;
+    int cashVal = 100;
     private TextView score;
     private TextView level;
+    private TextView cash;
     private float antx; //temp x
     private float anty = 550; //temp x
     private Handler handler = new Handler();
@@ -76,7 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ant = findViewById(R.id.ant);
         score = findViewById(R.id.ScoreText);
         level = findViewById(R.id.LevelText);
+        cash = findViewById(R.id.CashText);
+        bullet = findViewById(R.id.bullet2);
 //      ant.setOnTouchListener(this);
+
+
 
         /* this is for an initial tower spawn
         ImageButton tower1 = new ImageButton(this);
@@ -93,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         layout.addView(tower1);
         */
 
+        bullet.setX(screen_width + 80.0f);
+        bullet.setY(600);
+        bullet.setAdjustViewBounds(true);
 
         //coordinates for the ants
         ant.setX(screen_width + 80.0f);
@@ -116,15 +126,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     }
 
+
     //function to move the ants
     public void changePos() {
         antx += 10;
         if (ant.getX() > screen_width) {
             antx = -100.0f;
             anty = 550;
-            //problem when we spawn multiple ants, level would not increment linearly (put in timer)
-            levelVal++;
-            level.setText("Level " + levelVal);
         }
         if (ant.getX() > 240 && ant.getX() < 590) {
             antx-=10;
@@ -189,20 +197,50 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
         return false;
     }
+
+    public void shooting(ImageButton tower) {
+        float bulletx = tower.getX();
+        float bullety = (tower.getY());
+        while(bulletx < antx && bullety < anty) {
+            bulletx += 20;
+            bullety += 20;
+        }
+        while(bulletx < antx && bullety > anty) {
+            bulletx += 20;
+            bullety -= 20;
+        }
+        while(bulletx > antx && bullety < anty) {
+            bulletx -= 20;
+            bullety += 20;
+        }
+        while(bulletx > antx && bullety > anty) {
+            bulletx -= 20;
+            bullety -= 20;
+        }
+        bullet.setX(bulletx);
+        bullet.setY(bullety);
+    }
+
     @Override
     public void onClick(View v) {
-        ImageButton tower2 = new ImageButton(this);
-        tower2.setImageResource(R.drawable.tower1);
-        tower2.setX(600);
-        tower2.setY(850);
-        tower2.setMaxHeight(175);
-        tower2.setMaxWidth(175);
-        tower2.setAdjustViewBounds(true);
-        tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-        tower2.setBackgroundColor(Color.TRANSPARENT);
-        tower2.setOnTouchListener(this);
-        layout.addView(tower2);
+        if(cashVal >= 100) {
+            cashVal = cashVal - 100;
+            ImageButton tower2 = new ImageButton(this);
+            tower2.setImageResource(R.drawable.tower1);
+            tower2.setX(600);
+            tower2.setY(850);
+            tower2.setMaxHeight(175);
+            tower2.setMaxWidth(175);
+            tower2.setAdjustViewBounds(true);
+            tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            tower2.setBackgroundColor(Color.TRANSPARENT);
+            tower2.setOnTouchListener(this);
+            layout.addView(tower2);
+            //CHANU HELP ME HERE?
+            shooting(tower2);
+        }
+        cash.setText("Money: $" + cashVal);
     }
 
 

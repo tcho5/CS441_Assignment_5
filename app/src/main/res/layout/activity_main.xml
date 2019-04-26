@@ -37,6 +37,20 @@
         app:layout_constraintVertical_bias="0.142" />
 
     <TextView
+        android:id="@+id/CashText"
+        android:layout_width="184dp"
+        android:layout_height="45dp"
+        android:text="Money: $100"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <TextView
         android:id="@+id/LevelText"
         android:layout_width="184dp"
         android:layout_height="45dp"
@@ -85,6 +99,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ant1" />
+
+    <ImageView
+        android:id="@+id/bullet2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/shot2" />
 
 
 </android.support.constraint.ConstraintLayout>
