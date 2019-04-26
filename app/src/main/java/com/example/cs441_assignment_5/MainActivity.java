@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private TextView cash;
     private float antx; //temp x
     private float anty = 550; //temp x
+    private float bulletx;
+    private float bullety;
     private Handler handler = new Handler();
     private Timer timer = new Timer();
     private ConstraintLayout layout;
@@ -83,22 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         bullet = findViewById(R.id.bullet2);
 //      ant.setOnTouchListener(this);
 
-
-
-        /* this is for an initial tower spawn
-        ImageButton tower1 = new ImageButton(this);
-        tower1.setImageResource(R.drawable.tower1);
-        tower1.setX(220);
-        tower1.setY(625);
-        tower1.setMaxHeight(175);
-        tower1.setMaxWidth(175);
-        tower1.setAdjustViewBounds(true);
-        tower1.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-        tower1.setBackgroundColor(Color.TRANSPARENT);
-        tower1.setOnTouchListener(this);
-        layout.addView(tower1);
-        */
 
         bullet.setX(screen_width + 80.0f);
         bullet.setY(600);
@@ -197,58 +183,53 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
         return false;
     }
+    public boolean closeEnough() {
+        if((bulletx + antx < 2*antx - 50) && (bullety + anty < 2*anty - 50)){
+            return true;
+        }
+        return false;
+    }
 
     public void shooting(ImageButton tower) {
-        float bulletx = tower.getX();
-        float bullety = (tower.getY());
-        while (bulletx != antx && bullety != anty) {
             if (bulletx < antx && bullety < anty) {
-                bulletx += 20;
-                bullety += 20;
+                bulletx += 10;
+                bullety += 10;
+                bullet.setRotation(0);
             }
             if (bulletx < antx && bullety > anty) {
-            bulletx += 20;
-            bullety -= 20;
+                bulletx += 10;
+                bullety -= 10;
+                bullet.setRotation(0);
             }
             if (bulletx > antx && bullety < anty) {
-                bulletx -= 20;
-                bullety += 20;
+                bulletx -= 10;
+                bullety += 10;
+                bullet.setRotation(180);
             }
             if (bulletx > antx && bullety > anty) {
-                bulletx -= 20;
-                bullety -= 20;
+                bulletx -= 10;
+                bullety -= 10;
+                bullet.setRotation(180);
+            }
+            if (closeEnough()) {
+                ant.setX(screen_width + 80.0f);
+                ant.setY(550);
+                bullet.setX(tower.getX());
+                bullet.setY(tower.getY());
+                scoreVal += 10;
+                cashVal += 100;
+                levelVal++;
+                score.setText("Score: " +scoreVal);
+                cash.setText("Money: $" + cashVal);
+                level.setText("Level " + levelVal);
             }
             bullet.setX(bulletx);
             bullet.setY(bullety);
-        }
     }
 
     @Override
     public void onClick(View v) {
-        //PopupMenu popUpMenu = new PopupMenu(MainActivity.this, shopButton);
-        //popUpMenu.getMenuInflater().inflate(R.menu.popup_menu, popUpMenu.getMenu());
-//        popUpMenu.setOnMenuItemClickListener(MenuItem item){
-//
-//        }
-    showPopUp(v);
-//
-//        if(cashVal >= 100) {
-//            cashVal = cashVal - 100;
-//            ImageButton tower2 = new ImageButton(this);
-//            tower2.setImageResource(R.drawable.tower1);
-//            tower2.setX(600);
-//            tower2.setY(850);
-//            tower2.setMaxHeight(175);
-//            tower2.setMaxWidth(175);
-//            tower2.setAdjustViewBounds(true);
-//            tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT));
-//            tower2.setBackgroundColor(Color.TRANSPARENT);
-//            tower2.setOnTouchListener(this);
-//            layout.addView(tower2);
-//            shooting(tower2);
-//        }
-       // cash.setText("Money: $" + cashVal);
+        showPopUp(v);
     }
 
     public void showPopUp(View v){
@@ -264,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             case R.id.tower1:
                 if(cashVal >= 100) {
                     cashVal = cashVal - 100;
-                    ImageButton tower2 = new ImageButton(this);
+                    final ImageButton tower2 = new ImageButton(this);
                     tower2.setImageResource(R.drawable.tower1);
                     tower2.setX(600);
                     tower2.setY(850);
@@ -276,7 +257,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     tower2.setBackgroundColor(Color.TRANSPARENT);
                     tower2.setOnTouchListener(this);
                     layout.addView(tower2);
-                    shooting(tower2);
+                    bulletx = tower2.getX();
+                    bullety = tower2.getY();
+                    Timer timer = new Timer();
+                    timer.scheduleAtFixedRate(new TimerTask() {
+                                                  @Override
+                                                  public void run() {
+                                                      shooting(tower2);
+                                                  }
+                                              },
+                            0, 5);   // 1000 Millisecond  = 1 second
                 }
                 cash.setText("Money: $" + cashVal);
 //                Toast.makeText(this, "Item 1 clicked ", Toast.LENGTH_SHORT).show();
@@ -284,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             case R.id.tower2:
                 if(cashVal >= 200) {
                     cashVal = cashVal - 200;
-                    ImageButton tower2 = new ImageButton(this);
+                    final ImageButton tower2 = new ImageButton(this);
                     tower2.setImageResource(R.drawable.tower2);
                     tower2.setX(600);
                     tower2.setY(850);
@@ -296,7 +286,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     tower2.setBackgroundColor(Color.TRANSPARENT);
                     tower2.setOnTouchListener(this);
                     layout.addView(tower2);
-                    shooting(tower2);
+                    bulletx = tower2.getX();
+                    bullety = tower2.getY();
+                    Timer timer = new Timer();
+                    timer.scheduleAtFixedRate(new TimerTask() {
+                                                  @Override
+                                                  public void run() {
+                                                      shooting(tower2);
+                                                  }
+                                              },
+                            0, 5);
                 }
                 cash.setText("Money: $" + cashVal);
 //                Toast.makeText(this, "Item 2 clicked ", Toast.LENGTH_SHORT).show();
