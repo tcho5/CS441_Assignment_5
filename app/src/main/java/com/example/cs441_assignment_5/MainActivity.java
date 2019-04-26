@@ -201,24 +201,26 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public void shooting(ImageButton tower) {
         float bulletx = tower.getX();
         float bullety = (tower.getY());
-        while(bulletx < antx && bullety < anty) {
-            bulletx += 20;
-            bullety += 20;
-        }
-        while(bulletx < antx && bullety > anty) {
+        while (bulletx != antx && bullety != anty) {
+            if (bulletx < antx && bullety < anty) {
+                bulletx += 20;
+                bullety += 20;
+            }
+            if (bulletx < antx && bullety > anty) {
             bulletx += 20;
             bullety -= 20;
+            }
+            if (bulletx > antx && bullety < anty) {
+                bulletx -= 20;
+                bullety += 20;
+            }
+            if (bulletx > antx && bullety > anty) {
+                bulletx -= 20;
+                bullety -= 20;
+            }
+            bullet.setX(bulletx);
+            bullet.setY(bullety);
         }
-        while(bulletx > antx && bullety < anty) {
-            bulletx -= 20;
-            bullety += 20;
-        }
-        while(bulletx > antx && bullety > anty) {
-            bulletx -= 20;
-            bullety -= 20;
-        }
-        bullet.setX(bulletx);
-        bullet.setY(bullety);
     }
 
     @Override
