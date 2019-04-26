@@ -1,6 +1,5 @@
 package com.example.cs441_assignment_5;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Handler;
@@ -8,15 +7,15 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -35,7 +34,7 @@ class Tower {
     public float range;
 }
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener, PopupMenu.OnMenuItemClickListener{
     private float dX;
     private float dY;
     private int screen_width;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView bullet;
     int scoreVal = 0;
     int levelVal = 0;
-    int cashVal = 100;
+    int cashVal = 500;
     private TextView score;
     private TextView level;
     private TextView cash;
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private Handler handler = new Handler();
     private Timer timer = new Timer();
     private ConstraintLayout layout;
+    private ImageButton shopButton;
 
 
     @Override
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         //Gets rid of status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //
-        ImageButton shopButton = findViewById(R.id.shopButton);
+        shopButton = findViewById(R.id.shopButton);
         shopButton.setOnClickListener(this);
 
         ant = findViewById(R.id.ant);
@@ -225,25 +225,85 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public void onClick(View v) {
-        if(cashVal >= 100) {
-            cashVal = cashVal - 100;
-            ImageButton tower2 = new ImageButton(this);
-            tower2.setImageResource(R.drawable.tower1);
-            tower2.setX(600);
-            tower2.setY(850);
-            tower2.setMaxHeight(175);
-            tower2.setMaxWidth(175);
-            tower2.setAdjustViewBounds(true);
-            tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            tower2.setBackgroundColor(Color.TRANSPARENT);
-            tower2.setOnTouchListener(this);
-            layout.addView(tower2);
-            //CHANU HELP ME HERE?
-            shooting(tower2);
-        }
-        cash.setText("Money: $" + cashVal);
+        //PopupMenu popUpMenu = new PopupMenu(MainActivity.this, shopButton);
+        //popUpMenu.getMenuInflater().inflate(R.menu.popup_menu, popUpMenu.getMenu());
+//        popUpMenu.setOnMenuItemClickListener(MenuItem item){
+//
+//        }
+    showPopUp(v);
+//
+//        if(cashVal >= 100) {
+//            cashVal = cashVal - 100;
+//            ImageButton tower2 = new ImageButton(this);
+//            tower2.setImageResource(R.drawable.tower1);
+//            tower2.setX(600);
+//            tower2.setY(850);
+//            tower2.setMaxHeight(175);
+//            tower2.setMaxWidth(175);
+//            tower2.setAdjustViewBounds(true);
+//            tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+//                    LinearLayout.LayoutParams.WRAP_CONTENT));
+//            tower2.setBackgroundColor(Color.TRANSPARENT);
+//            tower2.setOnTouchListener(this);
+//            layout.addView(tower2);
+//            shooting(tower2);
+//        }
+       // cash.setText("Money: $" + cashVal);
     }
 
+    public void showPopUp(View v){
+        PopupMenu popUp = new PopupMenu(this, v);
+        popUp.setOnMenuItemClickListener(this);
+        popUp.inflate(R.menu.popup_menu);
+        popUp.show();
+    }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item){
+        switch(item.getItemId()) {
+            case R.id.tower1:
+                if(cashVal >= 100) {
+                    cashVal = cashVal - 100;
+                    ImageButton tower2 = new ImageButton(this);
+                    tower2.setImageResource(R.drawable.tower1);
+                    tower2.setX(600);
+                    tower2.setY(850);
+                    tower2.setMaxHeight(175);
+                    tower2.setMaxWidth(175);
+                    tower2.setAdjustViewBounds(true);
+                    tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT));
+                    tower2.setBackgroundColor(Color.TRANSPARENT);
+                    tower2.setOnTouchListener(this);
+                    layout.addView(tower2);
+                    shooting(tower2);
+                }
+                cash.setText("Money: $" + cashVal);
+//                Toast.makeText(this, "Item 1 clicked ", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tower2:
+                if(cashVal >= 200) {
+                    cashVal = cashVal - 200;
+                    ImageButton tower2 = new ImageButton(this);
+                    tower2.setImageResource(R.drawable.tower2);
+                    tower2.setX(600);
+                    tower2.setY(850);
+                    tower2.setMaxHeight(200);
+                    tower2.setMaxWidth(200);
+                    tower2.setAdjustViewBounds(true);
+                    tower2.setLayoutParams(new Gallery.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT));
+                    tower2.setBackgroundColor(Color.TRANSPARENT);
+                    tower2.setOnTouchListener(this);
+                    layout.addView(tower2);
+                    shooting(tower2);
+                }
+                cash.setText("Money: $" + cashVal);
+//                Toast.makeText(this, "Item 2 clicked ", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
 }
