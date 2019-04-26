@@ -119,6 +119,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         if (ant.getX() > screen_width) {
             antx = -100.0f;
             anty = 550;
+            if (scoreVal != 0) {
+                scoreVal++;
+                cashVal+=50;
+                cash.setText("Money: $" + cashVal);
+                score.setText("Score " + scoreVal);
+            }
+            else {
+                scoreVal++;
+            }
         }
         if (ant.getX() > 240 && ant.getX() < 590) {
             antx-=10;
@@ -149,11 +158,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             anty+=10;
             antx+=10;
             ant.setRotation(90);
-        }
-        //decrements score
-        if  (ant.getY() < 450 && ant.getX() > 1790) {
-            scoreVal--;
-            score.setText("Score " + scoreVal);
         }
         ant.setX(antx);
         ant.setY(anty);
